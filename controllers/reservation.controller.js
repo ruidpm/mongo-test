@@ -48,16 +48,11 @@ exports.getReservationDetails = async (req, res, next) => {
 
 exports.getAllReservedDates = async (req, res, next) => {
     try {
-        await Reservation.find({}, function (err, reservations) {
+        await Reservation.find({}, 'date', function (err, reservations) {
             if (err) {
                 return next(err);
             }
-
-            let reservedDates = [];
-            reservations.map(reservation => {
-                reservedDates.push(reservation.date);
-            });
-            res.send(reservedDates);
+            res.send(reservations);
         });
     } catch (e) {
         res.sendStatus(500);
