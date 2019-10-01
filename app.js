@@ -1,9 +1,15 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-let DEV_DB_URL = 'mongodb+srv://dev_user:passwordfordev@boatservice-rbeer.mongodb.net/test';
-let mongoDB = process.env.MONGODB_URI || DEV_DB_URL; 
+const DB_URL = process.env.DB_URL;
+const DB_USER = process.env.DB_USER;
+const DB_PASS = process.env.DB_PASS;
+
+let DEV_DB_URL = `mongodb+srv://${DB_USER}:${DB_PASS}${DB_URL}`;
+let mongoDB = DEV_DB_URL; 
 
 const PORT = 9999;
 
